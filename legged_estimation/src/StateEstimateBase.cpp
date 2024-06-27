@@ -5,7 +5,7 @@
 #include "legged_estimation/StateEstimateBase.h"
 
 #include <ocs2_centroidal_model/FactoryFunctions.h>
-#include <ocs2_legged_robot/common/Types.h>
+#include <legged_interface/common/Types.h>
 #include <ocs2_robotic_tools/common/RotationDerivativesTransforms.h>
 
 namespace legged {

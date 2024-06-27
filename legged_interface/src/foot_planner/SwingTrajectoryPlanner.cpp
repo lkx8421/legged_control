@@ -30,11 +30,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <boost/property_tree/info_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 
-#include "legged_interface/constraint/SwingTrajectoryPlanner.h"
+#include "legged_interface/foot_planner/SwingTrajectoryPlanner.h"
 
 #include <ocs2_core/misc/Lookup.h>
 
-#include <ocs2_legged_robot/gait/MotionPhaseDefinition.h>
+#include "legged_interface/gait/MotionPhaseDefinition.h"
 
 namespace ocs2 {
 namespace legged_robot {

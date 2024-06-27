@@ -31,8 +31,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <ocs2_core/reference/ModeSchedule.h>
 
-#include <ocs2_legged_robot/common/Types.h>
-#include <ocs2_legged_robot/foot_planner/SplineCpg.h>
+#include "legged_interface/common/Types.h"
+#include "legged_interface/foot_planner/SplineCpg.h"
 
 namespace ocs2 {
 namespace legged_robot {

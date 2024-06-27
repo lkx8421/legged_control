@@ -10,11 +10,11 @@
 
 #include <ocs2_centroidal_model/CentroidalModelRbdConversions.h>
 #include <ocs2_core/misc/Benchmark.h>
-#include <ocs2_legged_robot_ros/visualization/LeggedRobotVisualizer.h>
+#include <legged_interface_ros/visualization/LeggedRobotVisualizer.h>
 #include <ocs2_mpc/MPC_MRT_Interface.h>
 
 #include <legged_estimation/StateEstimateBase.h>
-#include <legged_interface/LeggedInterface.h>
+#include <legged_interface/LeggedRobotInterface.h>
 #include <legged_wbc/WbcBase.h>
 
 #include "legged_controllers/SafetyChecker.h"
@@ -44,7 +44,7 @@ class LeggedController : public controller_interface::MultiInterfaceController<H
   virtual void setupStateEstimate(const std::string& taskFile, bool verbose);
 
   // Interface
-  std::shared_ptr<LeggedInterface> leggedInterface_;
+  std::shared_ptr<LeggedRobotInterface> leggedInterface_;
   std::shared_ptr<PinocchioEndEffectorKinematics> eeKinematicsPtr_;
   std::vector<HybridJointHandle> hybridJointHandles_;
   std::vector<ContactSensorHandle> contactHandles_;

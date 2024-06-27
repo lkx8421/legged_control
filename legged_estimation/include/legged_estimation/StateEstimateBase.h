@@ -12,9 +12,9 @@
 #include <legged_common/hardware_interface/ContactSensorInterface.h>
 #include <legged_common/hardware_interface/HybridJointInterface.h>
 #include <ocs2_centroidal_model/CentroidalModelInfo.h>
-#include <ocs2_legged_robot/common/ModelSettings.h>
-#include <ocs2_legged_robot/common/Types.h>
-#include <ocs2_legged_robot/gait/MotionPhaseDefinition.h>
+#include <legged_interface/common/ModelSettings.h>
+#include <legged_interface/common/Types.h>
+#include <legged_interface/gait/MotionPhaseDefinition.h>
 #include <ocs2_pinocchio_interface/PinocchioEndEffectorKinematics.h>
 
 namespace legged {

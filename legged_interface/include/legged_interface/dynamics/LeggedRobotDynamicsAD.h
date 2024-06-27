@@ -29,40 +29,32 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #pragma once
 
-#include <ocs2_core/thread_support/Synchronized.h>
-#include <ocs2_oc/synchronized_module/ReferenceManager.h>
+#include <ocs2_core/dynamics/SystemDynamicsBase.h>
 
-#include <ocs2_legged_robot/gait/GaitSchedule.h>
-#include <ocs2_legged_robot/gait/MotionPhaseDefinition.h>
+#include <ocs2_centroidal_model/PinocchioCentroidalDynamicsAD.h>
+#include <ocs2_pinocchio_interface/PinocchioInterface.h>
 
-#include "legged_interface/constraint/SwingTrajectoryPlanner.h"
+#include "legged_interface/common/ModelSettings.h"
 
 namespace ocs2 {
 namespace legged_robot {
 
-/**
- * Manages the ModeSchedule and the TargetTrajectories for switched model.
- */
-class SwitchedModelReferenceManager : public ReferenceManager {
+class LeggedRobotDynamicsAD final : public SystemDynamicsBase {
  public:
-  SwitchedModelReferenceManager(std::shared_ptr<GaitSchedule> gaitSchedulePtr, std::shared_ptr<SwingTrajectoryPlanner> swingTrajectoryPtr);
+  LeggedRobotDynamicsAD(const PinocchioInterface& pinocchioInterface, const CentroidalModelInfo& info, const std::string& modelName,
+                        const ModelSettings& modelSettings);
 
-  ~SwitchedModelReferenceManager() override = default;
+  ~LeggedRobotDynamicsAD() override = default;
+  LeggedRobotDynamicsAD* clone() const override { return new LeggedRobotDynamicsAD(*this); }
 
-  void setModeSchedule(const ModeSchedule& modeSchedule) override;
+  vector_t computeFlowMap(scalar_t time, const vector_t& state, const vector_t& input, const PreComputation& preComp) override;
+  VectorFunctionLinearApproximation linearApproximation(scalar_t time, const vector_t& state, const vector_t& input,
+                                                        const PreComputation& preComp) override;
 
-  contact_flag_t getContactFlags(scalar_t time) const;
+ private:
+  LeggedRobotDynamicsAD(const LeggedRobotDynamicsAD& rhs) = default;
 
-  const std::shared_ptr<GaitSchedule>& getGaitSchedule() { return gaitSchedulePtr_; }
-
-  const std::shared_ptr<SwingTrajectoryPlanner>& getSwingTrajectoryPlanner() { return swingTrajectoryPtr_; }
-
- protected:
-  void modifyReferences(scalar_t initTime, scalar_t finalTime, const vector_t& initState, TargetTrajectories& targetTrajectories,
-                        ModeSchedule& modeSchedule) override;
-
-  std::shared_ptr<GaitSchedule> gaitSchedulePtr_;
-  std::shared_ptr<SwingTrajectoryPlanner> swingTrajectoryPtr_;
+  PinocchioCentroidalDynamicsAD pinocchioCentroidalDynamicsAd_;
 };
 
 }  // namespace legged_robot

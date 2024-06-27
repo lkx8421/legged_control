@@ -12,7 +12,7 @@
 #include <ocs2_core/penalties/Penalties.h>
 #include <ocs2_ddp/DDP_Settings.h>
 #include <ocs2_ipm/IpmSettings.h>
-#include <ocs2_legged_robot/common/ModelSettings.h>
+#include <legged_interface/common/ModelSettings.h>
 #include <ocs2_mpc/MPC_Settings.h>
 #include <ocs2_oc/rollout/TimeTriggeredRollout.h>
 #include <ocs2_pinocchio_interface/PinocchioInterface.h>
@@ -21,18 +21,18 @@
 #include <ocs2_self_collision/PinocchioGeometryInterface.h>
 #include <ocs2_sqp/SqpSettings.h>
 
-#include "legged_interface/SwitchedModelReferenceManager.h"
+#include "legged_interface/reference_manager/SwitchedModelReferenceManager.h"
 
 namespace legged {
 using namespace ocs2;
 using namespace legged_robot;
 
-class LeggedInterface : public RobotInterface {
+class LeggedRobotInterface : public RobotInterface {
  public:
-  LeggedInterface(const std::string& taskFile, const std::string& urdfFile, const std::string& referenceFile,
+  LeggedRobotInterface(const std::string& taskFile, const std::string& urdfFile, const std::string& referenceFile,
                   bool useHardFrictionConeConstraint = false);
 
-  ~LeggedInterface() override = default;
+  ~LeggedRobotInterface() override = default;
 
   virtual void setupOptimalControlProblem(const std::string& taskFile, const std::string& urdfFile, const std::string& referenceFile,
                                           bool verbose);

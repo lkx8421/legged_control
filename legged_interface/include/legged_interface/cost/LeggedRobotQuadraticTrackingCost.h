@@ -32,9 +32,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <ocs2_centroidal_model/CentroidalModelInfo.h>
 #include <ocs2_core/cost/QuadraticStateCost.h>
 #include <ocs2_core/cost/QuadraticStateInputCost.h>
-#include <ocs2_legged_robot/common/utils.h>
+#include <legged_interface/common/utils.h>
 
-#include "legged_interface/SwitchedModelReferenceManager.h"
+#include "legged_interface/reference_manager/SwitchedModelReferenceManager.h"
 
 namespace ocs2 {
 namespace legged_robot {

@@ -30,7 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "legged_interface/initialization/LeggedRobotInitializer.h"
 
 #include <ocs2_centroidal_model/AccessHelperFunctions.h>
-#include <ocs2_legged_robot/common/utils.h>
+#include <legged_interface/common/utils.h>
 
 namespace ocs2 {
 namespace legged_robot {

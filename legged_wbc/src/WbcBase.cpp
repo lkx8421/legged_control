@@ -192,7 +192,7 @@ Task WbcBase::formulateBaseAccelTask(const vector_t& stateDesired, const vector_
   const auto ADot = pinocchio::dccrba(model, data, qDesired, vDesired);
   Vector6 centroidalMomentumRate = info_.robotMass * getNormalizedCentroidalMomentumRate(pinocchioInterfaceDesired_, info_, inputDesired);
   centroidalMomentumRate.noalias() -= ADot * vDesired;
-  centroidalMomentumRate.noalias() -= Aj * jointAccel;
+  centroidalMomentumRate.noalias() -= Aj * jointAccel;//Todo:
 
   Vector6 b = AbInv * centroidalMomentumRate;
 

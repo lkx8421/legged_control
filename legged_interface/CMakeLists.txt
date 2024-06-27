@@ -6,8 +6,17 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 find_package(catkin REQUIRED
         COMPONENTS
         roscpp
-        ocs2_legged_robot
         ocs2_self_collision
+        ocs2_core
+        ocs2_oc
+        ocs2_ddp
+        ocs2_mpc
+        ocs2_sqp
+        ocs2_ipm
+        ocs2_robotic_tools
+        ocs2_pinocchio_interface
+        ocs2_centroidal_model
+        ocs2_robotic_assets
         )
 
 find_package(Boost REQUIRED COMPONENTS
@@ -27,10 +36,19 @@ catkin_package(
         ${PROJECT_NAME}
         CATKIN_DEPENDS
         roscpp
-        ocs2_legged_robot
         ocs2_self_collision
         DEPENDS
         pinocchio
+        ocs2_core
+        ocs2_oc
+        ocs2_ddp
+        ocs2_mpc
+        ocs2_sqp
+        ocs2_ipm
+        ocs2_robotic_tools
+        ocs2_pinocchio_interface
+        ocs2_centroidal_model
+        ocs2_robotic_assets
 )
 
 ###########
@@ -49,16 +67,24 @@ link_directories(
 )
 
 add_library(${PROJECT_NAME}
+        src/common/ModelSettings.cpp
         src/constraint/EndEffectorLinearConstraint.cpp
         src/constraint/FrictionConeConstraint.cpp
         src/constraint/ZeroForceConstraint.cpp
         src/constraint/NormalVelocityConstraintCppAd.cpp
         src/constraint/ZeroVelocityConstraintCppAd.cpp
-        src/constraint/SwingTrajectoryPlanner.cpp
+        src/dynamics/LeggedRobotDynamicsAD.cpp
+        src/foot_planner/CubicSpline.cpp
+        src/foot_planner/SplineCpg.cpp
+        src/foot_planner/SwingTrajectoryPlanner.cpp
+        src/gait/GaitSchedule.cpp
+        src/gait/Gait.cpp
+        src/gait/LegLogic.cpp
+        src/gait/ModeSequenceTemplate.cpp
         src/initialization/LeggedRobotInitializer.cpp
-        src/SwitchedModelReferenceManager.cpp
+        src/reference_manager/SwitchedModelReferenceManager.cpp
         src/LeggedRobotPreComputation.cpp
-        src/LeggedInterface.cpp
+        src/LeggedRobotInterface.cpp
         )
 
 target_link_libraries(${PROJECT_NAME}

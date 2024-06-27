@@ -31,7 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <ocs2_core/constraint/StateInputConstraint.h>
 
-#include "legged_interface/SwitchedModelReferenceManager.h"
+#include "legged_interface/reference_manager/SwitchedModelReferenceManager.h"
 #include "legged_interface/constraint/EndEffectorLinearConstraint.h"
 
 namespace ocs2 {

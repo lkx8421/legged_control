@@ -15,10 +15,10 @@ namespace legged {
 KalmanFilterEstimate::KalmanFilterEstimate(PinocchioInterface pinocchioInterface, CentroidalModelInfo info,
                                            const PinocchioEndEffectorKinematics& eeKinematics)
     : StateEstimateBase(std::move(pinocchioInterface), std::move(info), eeKinematics),
-      numContacts_(info_.numThreeDofContacts + info_.numSixDofContacts),
-      dimContacts_(3 * numContacts_),
-      numState_(6 + dimContacts_),
-      numObserve_(2 * dimContacts_ + numContacts_),
+      numContacts_(info_.numThreeDofContacts + info_.numSixDofContacts),//4
+      dimContacts_(3 * numContacts_),//12
+      numState_(6 + dimContacts_),//18
+      numObserve_(2 * dimContacts_ + numContacts_),// 24 + 4 = 28
       tfListener_(tfBuffer_),
       topicUpdated_(false) {
   xHat_.setZero(numState_);
