@@ -16,7 +16,7 @@
 #endif
 
 namespace legged {
-const std::vector<std::string> CONTACT_SENSOR_NAMES = {"RF_FOOT", "LF_FOOT", "RH_FOOT", "LH_FOOT"};
+const std::vector<std::string> CONTACT_SENSOR_NAMES = {"LF_foot", "LH_foot", "RF_foot", "RH_foot"};
 
 struct UnitreeMotorData {
   double pos_, vel_, tau_;                 // state

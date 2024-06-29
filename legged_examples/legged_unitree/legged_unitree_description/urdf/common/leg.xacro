@@ -139,13 +139,13 @@
             </inertial>
         </link>
 
-        <joint name="${prefix}_foot_fixed" type="fixed" dont_collapse="true">
+        <joint name="${prefix}_FOOT_fixed" type="fixed">
             <origin rpy="0 0 0" xyz="0 0 ${-(calf_length)}"/>
             <parent link="${prefix}_calf"/>
-            <child link="${prefix}_FOOT"/>
+            <child link="${prefix}_foot"/>
         </joint>
 
-        <link name="${prefix}_FOOT">
+        <link name="${prefix}_foot">
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
@@ -168,7 +168,7 @@
             </inertial>
         </link>
 
-        <gazebo reference="${prefix}_foot_fixed">
+        <gazebo reference="${prefix}_FOOT_fixed">
             <disableFixedJointLumping>true</disableFixedJointLumping>
         </gazebo>
 
@@ -190,7 +190,7 @@
             <mu2>0.6</mu2>
             <self_collide>1</self_collide>
         </gazebo>
-        <gazebo reference="${prefix}_FOOT">
+        <gazebo reference="${prefix}_foot">
             <mu1>0.6</mu1>
             <mu2>0.6</mu2>
             <self_collide>1</self_collide>

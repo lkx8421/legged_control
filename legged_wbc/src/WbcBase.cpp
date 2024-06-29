@@ -115,8 +115,8 @@ Task WbcBase::formulateTorqueLimitsTask() {
   d.block(info_.actuatedDofNum, info_.generalizedCoordinatesNum + 3 * info_.numThreeDofContacts, info_.actuatedDofNum,
           info_.actuatedDofNum) = -i;
   vector_t f(2 * info_.actuatedDofNum);
-  for (size_t l = 0; l < 2 * info_.actuatedDofNum / 3; ++l) {
-    f.segment<3>(3 * l) = torqueLimits_;
+  for (size_t l = 0; l < 2 * legNumber_; ++l) {
+    f.segment(legDof_ * l, legDof_) = torqueLimits_;
   }
 
   return {matrix_t(), vector_t(), d, f};
@@ -239,14 +239,6 @@ Task WbcBase::formulateContactForceTask(const vector_t& inputDesired) const {
 
 void WbcBase::loadTasksSetting(const std::string& taskFile, bool verbose) {
   // Load task file
-  torqueLimits_ = vector_t(info_.actuatedDofNum / 4);
-  loadData::loadEigenMatrix(taskFile, "torqueLimitsTask", torqueLimits_);
-  if (verbose) {
-    std::cerr << "\n #### Torque Limits Task:";
-    std::cerr << "\n #### =============================================================================\n";
-    std::cerr << "\n #### HAA HFE KFE: " << torqueLimits_.transpose() << "\n";
-    std::cerr << " #### =============================================================================\n";
-  }
   boost::property_tree::ptree pt;
   boost::property_tree::read_info(taskFile, pt);
   std::string prefix = "frictionConeTask.";
@@ -265,6 +257,22 @@ void WbcBase::loadTasksSetting(const std::string& taskFile, bool verbose) {
   }
   loadData::loadPtreeValue(pt, swingKp_, prefix + "kp", verbose);
   loadData::loadPtreeValue(pt, swingKd_, prefix + "kd", verbose);
+  prefix = "leggedRobotConfig.";
+  if (verbose) {
+    std::cerr << "\n #### Legged Robot Config:";
+    std::cerr << "\n #### =============================================================================\n";
+  }
+  loadData::loadPtreeValue(pt, legDof_, prefix + "singleLegDof", verbose);
+  loadData::loadPtreeValue(pt, legNumber_, prefix + "legNumber", verbose);
+
+  torqueLimits_ = vector_t(legDof_);
+  loadData::loadEigenMatrix(taskFile, "torqueLimitsTask", torqueLimits_);
+  if (verbose) {
+    std::cerr << "\n #### Torque Limits Task:";
+    std::cerr << "\n #### =============================================================================\n";
+    std::cerr << "\n #### " << torqueLimits_.transpose() << "\n";
+    std::cerr << " #### =============================================================================\n";
+  }
 }
 
 }  // namespace legged

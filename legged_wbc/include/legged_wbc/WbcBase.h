@@ -55,6 +55,7 @@ class WbcBase {
 
   // Task Parameters:
   vector_t torqueLimits_;
+  size_t legNumber_{}, legDof_{};
   scalar_t frictionCoeff_{}, swingKp_{}, swingKd_{};
 };
 

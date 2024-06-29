@@ -2,7 +2,7 @@ centroidalModelType             0      // 0: FullCentroidalDynamics, 1: Single R
 
 legged_robot_interface
 {
-  verbose                               false  // show the loaded parameters
+  verbose                               true  // show the loaded parameters
 }
 
 model_settings
@@ -13,6 +13,28 @@ model_settings
   verboseCppAd                  true
   recompileLibrariesCppAd       false
   modelFolderCppAd              /tmp/legged_control/a1
+  contactNames3DoF
+  {
+    [0]   LF_foot
+    [1]   RF_foot
+    [2]   LH_foot
+    [3]   RH_foot
+  }
+  jointNames
+  {
+    [0]   LF_HAA    
+    [1]   LF_HFE    
+    [2]   LF_KFE    
+    [3]   LH_HAA
+    [4]   LH_HFE
+    [5]   LH_KFE
+    [6]   RF_HAA
+    [7]   RF_HFE
+    [8]   RF_KFE
+    [9]   RH_HAA
+    [10]  RH_HFE
+    [11]  RH_KFE
+  }
 }
 
 swing_trajectory_config
@@ -267,10 +289,10 @@ selfCollision
     [1] "LH_calf, RH_calf"
     [2] "LF_calf, LH_calf"
     [3] "RF_calf, RH_calf"
-    [4] "LF_FOOT, RF_FOOT"
-    [5] "LH_FOOT, RH_FOOT"
-    [6] "LF_FOOT, LH_FOOT"
-    [7] "RF_FOOT, RH_FOOT"
+    [4] "LF_foot, RF_foot"
+    [5] "LH_foot, RH_foot"
+    [6] "LF_foot, LH_foot"
+    [7] "RF_foot, RH_foot"
   }
 
   minimumDistance  0.05
@@ -286,6 +308,12 @@ torqueLimitsTask
    (0,0)  33.5     ; HAA
    (1,0)  33.5     ; HFE
    (2,0)  33.5     ; KFE
+}
+
+leggedRobotConfig
+{
+  singleLegDof           3
+  legNumber              4
 }
 
 frictionConeTask
